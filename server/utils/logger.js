@@ -39,7 +39,6 @@ class Logger {
     };
 
     const color = colors[level] || colors.reset;
-    console.log(`${color}${formattedMessage.trim()}${colors.reset}`);
 
     // Write to file in production
     if (process.env.NODE_ENV === 'production') {

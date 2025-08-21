@@ -56,10 +56,6 @@ async function initiatePayment(
 
     return response.data;
   } catch (error) {
-    console.error(
-      "Error initiating payment:",
-      error.response?.data || error.message
-    );
     throw new Error("Failed to initiate payment");
   }
 }

@@ -14,7 +14,6 @@ const requiredVars = [
 const missingVars = requiredVars.filter(varName => !process.env[varName]);
 
 if (missingVars.length > 0 && process.env.NODE_ENV === 'production') {
-  console.error('Missing required environment variables:', missingVars);
   process.exit(1);
 }
 

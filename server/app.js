@@ -16,17 +16,17 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   : [
       'http://localhost:5173', 
       'http://127.0.0.1:5173',
-      'https://8f259c4fe07a.ngrok-free.app'
+      'https://f7ec3af3441d.ngrok-free.app'
     ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      console.log('CORS Origin received:', origin);
-      console.log('Allowed origins:', allowedOrigins);
+      // console.log('CORS Origin received:', origin);
+      // console.log('Allowed origins:', allowedOrigins);
       
       // Temporarily allow all origins for debugging
-      console.log('CORS: Origin allowed (debug mode)');
+      // console.log('CORS: Origin allowed (debug mode)');
       return callback(null, true);
     },
     credentials: false, // Match client withCredentials: false

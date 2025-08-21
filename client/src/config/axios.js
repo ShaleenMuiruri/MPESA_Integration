@@ -18,10 +18,7 @@ function axiosClient() {
       return response;
     },
     (error) => {
-      const statusCode = error && error.response ? error.response.status : 0;
-      if (statusCode === 401 && typeof window !== "undefined") {
-        console.error("Unauthorized access - token cleared");
-      }
+  
       return Promise.reject(error);
     }
   );
