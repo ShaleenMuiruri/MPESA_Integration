@@ -3,3 +3,13 @@
 @tailwind utilities;
 
 
+.PhoneInputInput:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #d1d5db !important;
+  }
+  
+  .PhoneInputInput {
+    outline: none !important;
+    box-shadow: none !important;
+  }
