@@ -9,7 +9,6 @@ require("dotenv").config();
 const generateAccessToken = async () => {
   const consumerKey = process.env.MPESA_CONSUMER_KEY;
   const consumerSecret = process.env.MPESA_CONSUMER_SECRET;
-
   const url =
     "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
 
@@ -30,7 +29,7 @@ const generateAccessToken = async () => {
     logger.error("Error fetching M-Pesa access token", {
       status: error.response?.status,
       data: error.response?.data,
-      message: error.message
+      message: error.message,
     });
     throw new Error("Failed to get access token.");
   }

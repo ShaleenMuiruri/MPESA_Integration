@@ -9,7 +9,7 @@ const { generateAccessToken } = require("../services/mpesaAuth.service");
 router.get("/token", async (req, res, next) => {
   try {
     const token = await generateAccessToken();
-    res.status(200).json({ success: true, access_token: token });
+    res.status(200).json({ success: true, auth_token: token });
   } catch (error) {
     next(error);
   }
@@ -56,8 +56,6 @@ router.post("/callback", (req, res) => {
       const transactionDetails = callbackData.CallbackMetadata?.Item || [];
       logger.info("STK Push payment successful", { transactionDetails });
       // Save to DB
-
-      
     } else {
       // Payment failed
       logger.error("STK Push payment failed", {

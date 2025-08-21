@@ -8,7 +8,6 @@ const {
 } = require("../config/env.js");
 const { getTimestamp } = require("../utils/timestamp.js");
 
-
 async function initiatePayment(
   amount,
   phoneNumber,

@@ -1,29 +1,20 @@
 {
-  "name": "mpesa",
+  "name": "mpesa-integration",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "test": "jest",
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "dev:watch": "nodemon --watch . --ext js,json server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.11.0",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0"
+    "dev": "concurrently -n server,client -c green,cyan \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "start": "concurrently -n server,client -c green,cyan \"npm:start:server\" \"npm:dev:client\"",
+    "start:server": "npm --prefix server start",
+    "start:client": "npm --prefix client run dev",
+    "preview": "npm --prefix client run preview",
+    "build": "npm --prefix client run build",
+    "install:all": "npm --prefix server i && npm --prefix client i"
   },
   "devDependencies": {
-    "jest": "^30.0.5",
-    "node-mocks-http": "^1.17.2",
-    "nodemon": "^3.1.10"
+    "concurrently": "^8.2.2"
   }
 }
+
