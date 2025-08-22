@@ -38,7 +38,7 @@ const Notification = ({ paymentStatus, statusMessage, handleRetry }: Notificatio
   return (
     <div className={`mb-4 p-3 rounded border ${getStatusColor()}`}>
       <div className="flex items-center gap-2">
-        {/* <span className="text-lg">{getIcon()}</span> */}
+        <span className="text-lg">{getIcon()}</span>
         <div className="flex-1">
           <p className="font-small">{statusMessage}</p>
         </div>
