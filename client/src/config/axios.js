@@ -1,6 +1,6 @@
 import HttpClient from "axios";
 
-const baseURL = import.meta.env.API_BASE_URL || "/api";
+const baseURL = import.meta.env.VITE_API_BASE_URL || "/api";
 
 const axios = HttpClient.create({
   baseURL,

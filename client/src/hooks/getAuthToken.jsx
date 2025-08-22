@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getAuthToken = async () => {
-  const BaseURL = (import.meta).env?.API_BASE_URL || "";
+  const BaseURL = (import.meta).env?.VITE_API_BASE_URL || "";
 
   try {
     const res = await axios.get(`${BaseURL}/api/payments/token`);
