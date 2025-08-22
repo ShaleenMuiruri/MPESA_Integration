@@ -16,9 +16,9 @@ export default function PaymentForm() {
   const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
-    const pusherKey = (import.meta as any).env?.VITE_PUSHER_KEY || "";
+    const pusherKey = (import.meta as any).env?.PUSHER_KEY || "";
     const pusherCluster =
-      (import.meta as any).env?.VITE_PUSHER_CLUSTER || "mt1";
+      (import.meta as any).env?.PUSHER_CLUSTER || "mt1";
     if (!pusherKey || !pusherCluster) {
       return;
     }
@@ -112,11 +112,14 @@ export default function PaymentForm() {
               <button
                 key={tab}
                 onClick={() => setActive(tab)}
+                disabled={tab !== "mpesa"}
                 className={
-                  active === tab
-                    ? "px-4 py-1 rounded-full text-sm capitalize bg-mpesa-green text-white"
-                    : "px-4 py-1 rounded-full text-sm capitalize bg-gray-100 text-gray-700"
-                }
+                    tab === "mpesa"
+                      ? active === tab
+                        ? "px-4 py-1 rounded-full text-sm capitalize bg-mpesa-green text-white"
+                        : "px-4 py-1 rounded-full text-sm capitalize bg-gray-100 text-gray-700"
+                      : "px-4 py-1 rounded-full text-sm capitalize bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
+                  }
               >
                 {tab}
               </button>
