@@ -7,6 +7,7 @@ const {
   CALLBACK_URL,
 } = require("../config/env.js");
 const { getTimestamp } = require("../utils/timestamp.js");
+const { formatKenyanPhoneNumber } = require("../utils/phoneNumber.js");
 
 async function initiatePayment(
   amount,
@@ -21,12 +22,7 @@ async function initiatePayment(
     `${MPESA_SHORTCODE}${MPESA_PASSKEY}${timestamp}`
   ).toString("base64");
 
-  let formattedPhone = phoneNumber;
-  if (phoneNumber.startsWith("0")) {
-    formattedPhone = `254${phoneNumber.slice(1)}`;
-  } else if (phoneNumber.startsWith("+254")) {
-    formattedPhone = phoneNumber.slice(1);
-  }
+  const formattedPhone = formatKenyanPhoneNumber(phoneNumber);
 
   const payload = {
     BusinessShortCode: MPESA_SHORTCODE,
@@ -36,7 +32,7 @@ async function initiatePayment(
     Amount: amount,
     PartyA: formattedPhone,
     PartyB: MPESA_SHORTCODE,
-    PhoneNumber: phoneNumber,
+    PhoneNumber: formattedPhone, // Use the same formatted number
     CallBackURL: CALLBACK_URL,
     AccountReference: accountReference,
     TransactionDesc: transactionDesc,
@@ -56,7 +52,12 @@ async function initiatePayment(
 
     return response.data;
   } catch (error) {
-    throw new Error("Failed to initiate payment");
+    // Throw a more detailed error
+    const errorMessage = error.response?.data?.errorMessage || 
+                        error.response?.data?.errorCode || 
+                        error.message || 
+                        'Failed to initiate payment';
+    throw new Error(`STK Push failed: ${errorMessage}`);
   }
 }
 

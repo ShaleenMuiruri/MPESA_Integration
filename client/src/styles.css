@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --mpesa-green: #00a651;
+  --mpesa-dark: #007a3d;
+}
 
 .PhoneInputInput:focus {
     outline: none !important;

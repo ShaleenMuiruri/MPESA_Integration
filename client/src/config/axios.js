@@ -7,22 +7,26 @@ const axios = HttpClient.create({
   withCredentials: false,
 });
 
-function axiosClient() {
-  const token = localStorage.getItem("mpesa_access_token");
-  axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  axios.defaults.headers.common["Content-Type"] = "application/json";
+// Attach auth token and common headers on every request
+axios.interceptors.request.use(
+  (config) => {
+    try {
 
-  // Add response interceptor for error handling
-  axios.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-  
-      return Promise.reject(error);
+      // Ensure JSON by default
+      config.headers = config.headers || {};
+      if (!config.headers["Content-Type"]) {
+        config.headers["Content-Type"] = "application/json";
+      }
+
+      return config;
+    } catch (_) {
+      return config;
     }
-  );
+  },
+  (error) => Promise.reject(error)
+);
 
+function axiosClient() {
   return axios;
 }
 
